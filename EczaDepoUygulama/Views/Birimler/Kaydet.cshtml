@@ -1,0 +1,38 @@
+﻿@model EczaDepoUygulama.Models.Entity.birimtbl
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Birim Ekle</h2>
+
+<div class="container">
+
+    @using (Html.BeginForm("Kaydet", "Birimler", FormMethod.Post))
+    {
+        <div class="form-group">
+            <b>
+                Id
+            </b>
+            @Html.TextBoxFor(x => x.birim_id, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <b>
+                Birim
+            </b>
+            @Html.TextBoxFor(x => x.birim, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <b>
+                Açıklama
+            </b>
+            @Html.TextAreaFor(x => x.aciklama, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success">Birim Kaydet</button>
+        </div>
+    }
+</div>

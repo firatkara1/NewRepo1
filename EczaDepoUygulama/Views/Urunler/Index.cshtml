@@ -1,0 +1,47 @@
+﻿@model List<EczaDepoUygulama.Models.Entity.ilactbl>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ürün Listesi</h2>
+<table class="table">
+    <thead style="background-color:aliceblue">
+        <tr>
+            <th>ID</th>
+            <th>Kategori</th>
+            <th>Marka</th>
+            <th>Ürün Adı</th>
+            <th>Barkod No</th>
+            <th>Alış Fiyatı</th>
+            <th>Satış Fiyatı</th>
+            <th>Miktar</th>
+            <th>Birim</th>
+            <th>KDV</th>
+            <th>Tarih</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => item.ilac_id)</td>
+                <td>@Html.DisplayFor(x => item.kategorilertbl.kategori)</td>
+                <td>@Html.DisplayFor(x => item.markalartbl.marka)</td>
+                <td>@Html.DisplayFor(x => item.ilac_adi)</td>
+                <td>@Html.DisplayFor(x => item.barkod_no)</td>
+                <td>@Html.DisplayFor(x => item.alis_fiyati)</td>
+                <td>@Html.DisplayFor(x => item.satis_fiyati)</td>
+                <td>@Html.DisplayFor(x => item.miktari)</td>
+                <td>@Html.DisplayFor(x => item.birimtbl.birim)</td>
+                <td>@Html.DisplayFor(x => item.kdv)</td>
+                <td>@Html.DisplayFor(x => item.tarih)</td>
+                <td>@Html.ActionLink("Sil", "SilBilgiGetir", new { id = item.ilac_id }, new { @class = "btn btn-danger" })</td>
+                <td>@Html.ActionLink("Güncelle", "GuncelleBilgiGetir", new { id = item.ilac_id }, new { @class = "btn btn-primary" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Urunler/Ekle" class="btn btn-success">Ürün Ekle</a>

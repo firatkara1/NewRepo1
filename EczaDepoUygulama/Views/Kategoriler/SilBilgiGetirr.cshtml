@@ -1,0 +1,30 @@
+﻿@model EczaDepoUygulama.Models.Entity.kategorilertbl
+@{
+    ViewBag.Title = "SilBilgiGetirr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kategori Sil</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Sil", "Kategoriler"))
+    {
+    <h1></h1>
+    <h4>Silinsin mi</h4>
+    <div class="form-group">
+        @Html.HiddenFor(x => x.kategori_id)
+        <b>@Html.LabelFor(x => x.kategori):</b>
+        @Html.DisplayFor(x => x.kategori, new { @class = "form-control" })
+    </div>
+    <div>
+        <b>@Html.LabelFor(x => x.aciklama):</b>
+        @Html.DisplayFor(x => x.aciklama, new { @class = "form-control" })
+    </div>
+        <div>
+            <button class="btn btn-danger">Kategori sil</button>
+
+            <a href="/Kategoriler/Index">Ana Sayfa</a>
+        </div>
+    }
+
+</div>

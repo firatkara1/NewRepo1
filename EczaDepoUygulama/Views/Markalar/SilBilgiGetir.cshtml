@@ -1,0 +1,36 @@
+﻿@model EczaDepoUygulama.Models.Entity.markalartbl
+@{
+    ViewBag.Title = "SilBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Marka Sil</h2>
+
+
+<div class="container">
+    <h4>Marka Silinsin mi</h4>
+
+    @using (Html.BeginForm("Sil", "Markalar"))
+    {
+
+        @Html.HiddenFor(x => x.marka_id)
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.kategorilertbl.kategori):</b>
+            @Html.DisplayFor(x => x.kategorilertbl.kategori)
+        </div>
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.marka):</b>
+            @Html.DisplayFor(x => x.marka)
+        </div>
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.aciklama):</b>
+            @Html.DisplayFor(x => x.aciklama)
+        </div>
+        <div>
+            <button class="btn btn-danger">
+                Sil
+            </button>
+            <a href="/Markalar/Index/">Ana Sayfa</a>
+        </div>
+    }
+</div>

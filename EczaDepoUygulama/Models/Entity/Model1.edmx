@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EczaDepoUygulamaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="birimtbl">
+          <Key>
+            <PropertyRef Name="birim_id" />
+          </Key>
+          <Property Name="birim_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="birim" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="aciklama" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ilactbl">
+          <Key>
+            <PropertyRef Name="ilac_id" />
+          </Key>
+          <Property Name="ilac_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ilac_adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="kategori_id" Type="int" Nullable="false" />
+          <Property Name="marka_id" Type="int" Nullable="false" />
+          <Property Name="barkod_no" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="alis_fiyati" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="satis_fiyati" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="miktari" Type="decimal" Precision="28" Scale="2" />
+          <Property Name="kdv" Type="int" Nullable="false" />
+          <Property Name="birim_id" Type="int" Nullable="false" />
+          <Property Name="tarih" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kategorilertbl">
+          <Key>
+            <PropertyRef Name="kategori_id" />
+          </Key>
+          <Property Name="kategori_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategori" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="aciklama" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="markalartbl">
+          <Key>
+            <PropertyRef Name="marka_id" />
+          </Key>
+          <Property Name="marka_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategori_id" Type="int" Nullable="false" />
+          <Property Name="marka" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="aciklama" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="musterilertbl">
+          <Key>
+            <PropertyRef Name="musteri_id" />
+          </Key>
+          <Property Name="musteri_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="musteri_ad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="musteri_tel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="musteri_adres" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="musteri_mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="musteri_foto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="musteri_kayit_tarih" Type="date" Nullable="false" />
+          <Property Name="musteri_puan" Type="decimal" Precision="28" Scale="0" Nullable="false" />
+          <Property Name="aciklama" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="satislartbl">
+          <Key>
+            <PropertyRef Name="satis_id" />
+          </Key>
+          <Property Name="satis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ilac_id" Type="int" Nullable="false" />
+          <Property Name="sepet_id" Type="int" Nullable="false" />
+          <Property Name="barkod_no" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="birim_fiyati" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="toplam_fiyati" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="kdv" Type="int" Nullable="false" />
+          <Property Name="birim_id" Type="int" Nullable="false" />
+          <Property Name="tarih" Type="date" Nullable="false" />
+          <Property Name="saat" Type="datetime" Nullable="false" />
+          <Property Name="miktari" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_ilactbl_birimtbl">
+          <End Role="birimtbl" Type="Self.birimtbl" Multiplicity="1" />
+          <End Role="ilactbl" Type="Self.ilactbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="birimtbl">
+              <PropertyRef Name="birim_id" />
+            </Principal>
+            <Dependent Role="ilactbl">
+              <PropertyRef Name="birim_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilactbl_kategorilertbl">
+          <End Role="kategorilertbl" Type="Self.kategorilertbl" Multiplicity="1" />
+          <End Role="ilactbl" Type="Self.ilactbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategorilertbl">
+              <PropertyRef Name="kategori_id" />
+            </Principal>
+            <Dependent Role="ilactbl">
+              <PropertyRef Name="kategori_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilactbl_markalartbl">
+          <End Role="markalartbl" Type="Self.markalartbl" Multiplicity="1" />
+          <End Role="ilactbl" Type="Self.ilactbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="markalartbl">
+              <PropertyRef Name="marka_id" />
+            </Principal>
+            <Dependent Role="ilactbl">
+              <PropertyRef Name="marka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_markalartbl_kategorilertbl">
+          <End Role="kategorilertbl" Type="Self.kategorilertbl" Multiplicity="1" />
+          <End Role="markalartbl" Type="Self.markalartbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategorilertbl">
+              <PropertyRef Name="kategori_id" />
+            </Principal>
+            <Dependent Role="markalartbl">
+              <PropertyRef Name="kategori_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_satislartbl_ilactbl">
+          <End Role="ilactbl" Type="Self.ilactbl" Multiplicity="1" />
+          <End Role="satislartbl" Type="Self.satislartbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ilactbl">
+              <PropertyRef Name="ilac_id" />
+            </Principal>
+            <Dependent Role="satislartbl">
+              <PropertyRef Name="ilac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EczaDepoUygulamaModelStoreContainer">
+          <EntitySet Name="birimtbl" EntityType="Self.birimtbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ilactbl" EntityType="Self.ilactbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kategorilertbl" EntityType="Self.kategorilertbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="markalartbl" EntityType="Self.markalartbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="musterilertbl" EntityType="Self.musterilertbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="satislartbl" EntityType="Self.satislartbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ilactbl_birimtbl" Association="Self.FK_ilactbl_birimtbl">
+            <End Role="birimtbl" EntitySet="birimtbl" />
+            <End Role="ilactbl" EntitySet="ilactbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilactbl_kategorilertbl" Association="Self.FK_ilactbl_kategorilertbl">
+            <End Role="kategorilertbl" EntitySet="kategorilertbl" />
+            <End Role="ilactbl" EntitySet="ilactbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilactbl_markalartbl" Association="Self.FK_ilactbl_markalartbl">
+            <End Role="markalartbl" EntitySet="markalartbl" />
+            <End Role="ilactbl" EntitySet="ilactbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_markalartbl_kategorilertbl" Association="Self.FK_markalartbl_kategorilertbl">
+            <End Role="kategorilertbl" EntitySet="kategorilertbl" />
+            <End Role="markalartbl" EntitySet="markalartbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_satislartbl_ilactbl" Association="Self.FK_satislartbl_ilactbl">
+            <End Role="ilactbl" EntitySet="ilactbl" />
+            <End Role="satislartbl" EntitySet="satislartbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EczaDepoUygulamaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="birimtbl">
+          <Key>
+            <PropertyRef Name="birim_id" />
+          </Key>
+          <Property Name="birim_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="birim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ilactbl" Relationship="Self.FK_ilactbl_birimtbl" FromRole="birimtbl" ToRole="ilactbl" />
+        </EntityType>
+        <EntityType Name="ilactbl">
+          <Key>
+            <PropertyRef Name="ilac_id" />
+          </Key>
+          <Property Name="ilac_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ilac_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kategori_id" Type="Int32" Nullable="false" />
+          <Property Name="marka_id" Type="Int32" Nullable="false" />
+          <Property Name="barkod_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="alis_fiyati" Type="Decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="satis_fiyati" Type="Decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="kdv" Type="Int32" Nullable="false" />
+          <Property Name="birim_id" Type="Int32" Nullable="false" />
+          <Property Name="tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="birimtbl" Relationship="Self.FK_ilactbl_birimtbl" FromRole="ilactbl" ToRole="birimtbl" />
+          <NavigationProperty Name="kategorilertbl" Relationship="Self.FK_ilactbl_kategorilertbl" FromRole="ilactbl" ToRole="kategorilertbl" />
+          <NavigationProperty Name="markalartbl" Relationship="Self.FK_ilactbl_markalartbl" FromRole="ilactbl" ToRole="markalartbl" />
+          <NavigationProperty Name="satislartbl" Relationship="Self.FK_satislartbl_ilactbl" FromRole="ilactbl" ToRole="satislartbl" />
+          <Property Name="miktari" Type="Decimal" Precision="28" Scale="2" />
+        </EntityType>
+        <EntityType Name="kategorilertbl">
+          <Key>
+            <PropertyRef Name="kategori_id" />
+          </Key>
+          <Property Name="kategori_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategori" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ilactbl" Relationship="Self.FK_ilactbl_kategorilertbl" FromRole="kategorilertbl" ToRole="ilactbl" />
+          <NavigationProperty Name="markalartbl" Relationship="Self.FK_markalartbl_kategorilertbl" FromRole="kategorilertbl" ToRole="markalartbl" />
+        </EntityType>
+        <EntityType Name="markalartbl">
+          <Key>
+            <PropertyRef Name="marka_id" />
+          </Key>
+          <Property Name="marka_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategori_id" Type="Int32" Nullable="false" />
+          <Property Name="marka" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ilactbl" Relationship="Self.FK_ilactbl_markalartbl" FromRole="markalartbl" ToRole="ilactbl" />
+          <NavigationProperty Name="kategorilertbl" Relationship="Self.FK_markalartbl_kategorilertbl" FromRole="markalartbl" ToRole="kategorilertbl" />
+        </EntityType>
+        <EntityType Name="musterilertbl">
+          <Key>
+            <PropertyRef Name="musteri_id" />
+          </Key>
+          <Property Name="musteri_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="musteri_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="musteri_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="musteri_adres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="musteri_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="musteri_foto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="musteri_kayit_tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="musteri_puan" Type="Decimal" Precision="28" Scale="0" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="satislartbl">
+          <Key>
+            <PropertyRef Name="satis_id" />
+          </Key>
+          <Property Name="satis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ilac_id" Type="Int32" Nullable="false" />
+          <Property Name="sepet_id" Type="Int32" Nullable="false" />
+          <Property Name="barkod_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birim_fiyati" Type="Decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="toplam_fiyati" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="kdv" Type="Int32" Nullable="false" />
+          <Property Name="birim_id" Type="Int32" Nullable="false" />
+          <Property Name="tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="saat" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ilactbl" Relationship="Self.FK_satislartbl_ilactbl" FromRole="satislartbl" ToRole="ilactbl" />
+          <Property Name="miktari" Type="Decimal" Nullable="false" Precision="28" Scale="2" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_ilactbl_birimtbl">
+          <End Role="birimtbl" Type="Self.birimtbl" Multiplicity="1" />
+          <End Role="ilactbl" Type="Self.ilactbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="birimtbl">
+              <PropertyRef Name="birim_id" />
+            </Principal>
+            <Dependent Role="ilactbl">
+              <PropertyRef Name="birim_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilactbl_kategorilertbl">
+          <End Role="kategorilertbl" Type="Self.kategorilertbl" Multiplicity="1" />
+          <End Role="ilactbl" Type="Self.ilactbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategorilertbl">
+              <PropertyRef Name="kategori_id" />
+            </Principal>
+            <Dependent Role="ilactbl">
+              <PropertyRef Name="kategori_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilactbl_markalartbl">
+          <End Role="markalartbl" Type="Self.markalartbl" Multiplicity="1" />
+          <End Role="ilactbl" Type="Self.ilactbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="markalartbl">
+              <PropertyRef Name="marka_id" />
+            </Principal>
+            <Dependent Role="ilactbl">
+              <PropertyRef Name="marka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_satislartbl_ilactbl">
+          <End Role="ilactbl" Type="Self.ilactbl" Multiplicity="1" />
+          <End Role="satislartbl" Type="Self.satislartbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ilactbl">
+              <PropertyRef Name="ilac_id" />
+            </Principal>
+            <Dependent Role="satislartbl">
+              <PropertyRef Name="ilac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_markalartbl_kategorilertbl">
+          <End Role="kategorilertbl" Type="Self.kategorilertbl" Multiplicity="1" />
+          <End Role="markalartbl" Type="Self.markalartbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategorilertbl">
+              <PropertyRef Name="kategori_id" />
+            </Principal>
+            <Dependent Role="markalartbl">
+              <PropertyRef Name="kategori_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EczaDepoUygulamaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="birimtbl" EntityType="Self.birimtbl" />
+          <EntitySet Name="ilactbl" EntityType="Self.ilactbl" />
+          <EntitySet Name="kategorilertbl" EntityType="Self.kategorilertbl" />
+          <EntitySet Name="markalartbl" EntityType="Self.markalartbl" />
+          <EntitySet Name="musterilertbl" EntityType="Self.musterilertbl" />
+          <EntitySet Name="satislartbl" EntityType="Self.satislartbl" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_ilactbl_birimtbl" Association="Self.FK_ilactbl_birimtbl">
+            <End Role="birimtbl" EntitySet="birimtbl" />
+            <End Role="ilactbl" EntitySet="ilactbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilactbl_kategorilertbl" Association="Self.FK_ilactbl_kategorilertbl">
+            <End Role="kategorilertbl" EntitySet="kategorilertbl" />
+            <End Role="ilactbl" EntitySet="ilactbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilactbl_markalartbl" Association="Self.FK_ilactbl_markalartbl">
+            <End Role="markalartbl" EntitySet="markalartbl" />
+            <End Role="ilactbl" EntitySet="ilactbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_satislartbl_ilactbl" Association="Self.FK_satislartbl_ilactbl">
+            <End Role="ilactbl" EntitySet="ilactbl" />
+            <End Role="satislartbl" EntitySet="satislartbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_markalartbl_kategorilertbl" Association="Self.FK_markalartbl_kategorilertbl">
+            <End Role="kategorilertbl" EntitySet="kategorilertbl" />
+            <End Role="markalartbl" EntitySet="markalartbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EczaDepoUygulamaModelStoreContainer" CdmEntityContainer="EczaDepoUygulamaEntities">
+          <EntitySetMapping Name="birimtbl">
+            <EntityTypeMapping TypeName="EczaDepoUygulamaModel.birimtbl">
+              <MappingFragment StoreEntitySet="birimtbl">
+                <ScalarProperty Name="birim_id" ColumnName="birim_id" />
+                <ScalarProperty Name="birim" ColumnName="birim" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ilactbl">
+            <EntityTypeMapping TypeName="EczaDepoUygulamaModel.ilactbl">
+              <MappingFragment StoreEntitySet="ilactbl">
+                <ScalarProperty Name="miktari" ColumnName="miktari" />
+                <ScalarProperty Name="ilac_id" ColumnName="ilac_id" />
+                <ScalarProperty Name="ilac_adi" ColumnName="ilac_adi" />
+                <ScalarProperty Name="kategori_id" ColumnName="kategori_id" />
+                <ScalarProperty Name="marka_id" ColumnName="marka_id" />
+                <ScalarProperty Name="barkod_no" ColumnName="barkod_no" />
+                <ScalarProperty Name="alis_fiyati" ColumnName="alis_fiyati" />
+                <ScalarProperty Name="satis_fiyati" ColumnName="satis_fiyati" />
+                <ScalarProperty Name="kdv" ColumnName="kdv" />
+                <ScalarProperty Name="birim_id" ColumnName="birim_id" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kategorilertbl">
+            <EntityTypeMapping TypeName="EczaDepoUygulamaModel.kategorilertbl">
+              <MappingFragment StoreEntitySet="kategorilertbl">
+                <ScalarProperty Name="kategori_id" ColumnName="kategori_id" />
+                <ScalarProperty Name="kategori" ColumnName="kategori" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="markalartbl">
+            <EntityTypeMapping TypeName="EczaDepoUygulamaModel.markalartbl">
+              <MappingFragment StoreEntitySet="markalartbl">
+                <ScalarProperty Name="marka_id" ColumnName="marka_id" />
+                <ScalarProperty Name="kategori_id" ColumnName="kategori_id" />
+                <ScalarProperty Name="marka" ColumnName="marka" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="musterilertbl">
+            <EntityTypeMapping TypeName="EczaDepoUygulamaModel.musterilertbl">
+              <MappingFragment StoreEntitySet="musterilertbl">
+                <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
+                <ScalarProperty Name="musteri_ad" ColumnName="musteri_ad" />
+                <ScalarProperty Name="musteri_tel" ColumnName="musteri_tel" />
+                <ScalarProperty Name="musteri_adres" ColumnName="musteri_adres" />
+                <ScalarProperty Name="musteri_mail" ColumnName="musteri_mail" />
+                <ScalarProperty Name="musteri_foto" ColumnName="musteri_foto" />
+                <ScalarProperty Name="musteri_kayit_tarih" ColumnName="musteri_kayit_tarih" />
+                <ScalarProperty Name="musteri_puan" ColumnName="musteri_puan" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="satislartbl">
+            <EntityTypeMapping TypeName="EczaDepoUygulamaModel.satislartbl">
+              <MappingFragment StoreEntitySet="satislartbl">
+                <ScalarProperty Name="miktari" ColumnName="miktari" />
+                <ScalarProperty Name="satis_id" ColumnName="satis_id" />
+                <ScalarProperty Name="ilac_id" ColumnName="ilac_id" />
+                <ScalarProperty Name="sepet_id" ColumnName="sepet_id" />
+                <ScalarProperty Name="barkod_no" ColumnName="barkod_no" />
+                <ScalarProperty Name="birim_fiyati" ColumnName="birim_fiyati" />
+                <ScalarProperty Name="toplam_fiyati" ColumnName="toplam_fiyati" />
+                <ScalarProperty Name="kdv" ColumnName="kdv" />
+                <ScalarProperty Name="birim_id" ColumnName="birim_id" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+                <ScalarProperty Name="saat" ColumnName="saat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EczaDepoUygulamaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

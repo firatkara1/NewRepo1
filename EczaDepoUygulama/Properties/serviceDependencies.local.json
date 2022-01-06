@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql.local",
+      "connectionId": "DESKTOP-AT15TVQ\\SQLEXPRESS",
+      "secretStore": "LocalSecretsFile"
+    }
+  }
+}

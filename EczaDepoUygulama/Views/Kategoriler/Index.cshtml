@@ -1,0 +1,40 @@
+﻿@using EczaDepoUygulama.Models.Entity
+@model List<EczaDepoUygulama.Models.Entity.kategorilertbl>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kategoriler</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Kategori
+            </td>
+            <td>
+                Açıklama
+            </td>
+            <td>Sil</td>
+            <td>Güncelle</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+         {
+            <tr>
+                <td>@item.kategori_id</td>
+                <td>@item.kategori</td>
+                <td>@item.aciklama</td>
+                <td><a href="/Kategoriler/SilBilgiGetirr/@item.kategori_id" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Kategoriler/GuncelleBilgiGetir/@item.kategori_id" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+         }
+    </tbody>
+</table>
+<a href="/Kategoriler/Ekle/" class="btn btn-success" style="margin-top: 15px">Kategori Ekle</a>

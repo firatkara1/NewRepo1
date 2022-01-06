@@ -1,0 +1,51 @@
+﻿
+@model List<EczaDepoUygulama.Models.Entity.markalartbl>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Markalar Listesi</h2>
+<table class="table">
+
+    <thead style="background-color:antiquewhite">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Kategori
+            </th>
+            <th>
+                Marka
+            </th>
+            <th>
+                Açıklama
+            </th>
+            <th>
+                 
+            </th>
+            <th>
+                 
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.marka_id
+                </td>
+                <td>@item.kategorilertbl.kategori</td>
+                <td>@item.marka</td>
+                <td>@item.aciklama</td>
+                <td><a href="/Markalar/SilBilgiGetir/@item.marka_id" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Markalar/GuncelleBilgiGetir/@item.marka_id" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<a href="/Markalar/Ekle" class="btn btn-success">Marka Ekle</a>

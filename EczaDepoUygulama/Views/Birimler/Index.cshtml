@@ -1,0 +1,40 @@
+﻿@using EczaDepoUygulama.Models.Entity
+@model List<EczaDepoUygulama.Models.Entity.birimtbl>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Birim Listesi</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Birim
+            </td>
+            <td>
+                Açıklama
+            </td>
+            <td>Sil</td>
+            <td>Güncelle</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.birim_id</td>
+                <td>@item.birim</td>
+                <td>@item.aciklama</td>
+                <td><a href="/Birimler/SilBilgiGetirr/@item.birim_id" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Birimler/GuncelleBilgiGetir/@item.birim_id" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Birimler/Ekle/" class="btn btn-success" style="margin-top: 15px">Birim Ekle</a>

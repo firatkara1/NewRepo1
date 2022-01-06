@@ -1,0 +1,29 @@
+﻿@model EczaDepoUygulama.Models.Entity.birimtbl
+@{
+    ViewBag.Title = "SilBilgiGetirr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Birim Sil</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Sil", "Birimler"))
+    {
+        <h1></h1>
+        <h4>Silinsin mi</h4>
+        <div class="form-group">
+            @Html.HiddenFor(x => x.birim_id)
+            <b>@Html.LabelFor(x => x.birim):</b>
+            @Html.DisplayFor(x => x.birim, new { @class = "form-control" })
+        </div>
+        <div>
+            <b>@Html.LabelFor(x => x.aciklama):</b>
+            @Html.DisplayFor(x => x.aciklama, new { @class = "form-control" })
+        </div>
+        <div>
+            <button class="btn btn-danger">Birim sil</button>
+            <a href="/Birimler/Index">Ana Sayfa</a>
+        </div>
+    }
+
+</div>
