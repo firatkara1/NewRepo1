@@ -1,5 +1,5 @@
 # asp.net-mvc-stock-tracking-app
-It is a stock tracking project with asp.net mvc. MS SQL Server as database. I made the application to be used in the pharmacy store.
+It is a stock tracking project with asp.net mvc. MS SQL Server was used as database. I made the application to be used in the pharmacy store.
 
 
 ![img]( https://i.ibb.co/j8rCrwp/sta1.png)
