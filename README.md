@@ -8,7 +8,7 @@ It is a stock tracking project with asp.net mvc. MS SQL Server as database. I ma
 ![img]( https://i.ibb.co/qxn0tp7/sta4.png)
 ![img]( https://i.ibb.co/rvPtpPb/sta5.png)
 ![img]( https://i.ibb.co/3Rz4GDH/sta6.png)
-![img]( https://i.ibb.co/LNLzR8z/sta7.png)
+![img]( https://i.ibb.co/v4swPx1/sta7.png)
 
 
 
